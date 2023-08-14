@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111;
+    }
+    #game-container {
+      position: relative;
+      width: 400px;
+      height: 500px;
+      border: 2px solid #555;
+      background-color: #111;
+    }
+    .ball, .paddle, .brick {
+      position: absolute;
+      width: 50px;
+      height: 15px;
+      border-radius: 5px;
+    }
+    .ball {
+      background-color: #ff8a66;
+    }
+    .paddle {
+      bottom: 10px;
+      background-color: #66a3ff;
+    }
+    .brick {
+      background-color: #66ff66;
+    }
+    .game-over-message {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ff5733;
+      font-size: 24px;
+      text-align: center;
+    }
+    .victory-message {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #66ff66;
+      font-size: 24px;
+      text-align: center;
+    }
+  </style>
+  <title>Breakout Game</title>
+</head>
+<body>
+  <div id="game-container">
+    <div class="ball"></div>
+    <div class="paddle"></div>
+    <div class="brick-row"></div>
+    <div class="game-over-message" id="game-over-message">Game Over<br><button id="replay-button">Replay</button></div>
+    <div class="victory-message" id="victory-message">Victory!<br><button id="replay-button">Replay</button></div>
+  </div>
+  <script>
+    const ball = document.querySelector('.ball');
+    const paddle = document.querySelector('.paddle');
+    const bricksContainer = document.querySelector('.brick-row');
+    const replayButton = document.getElementById('replay-button');
+    const gameOverMessage = document.getElementById('game-over-message');
+    const victoryMessage = document.getElementById('victory-message');
+
+    const bricks = [];
+    const brickRowCount = 5;
+    const brickColumnCount = 8;
+
+    for (let row = 0; row < brickRowCount; row++) {
+      for (let col = 0; col < brickColumnCount; col++) {
+        const brick = document.createElement('div');
+        brick.classList.add('brick');
+        brick.style.left = `${col * 50}px`;
+        brick.style.top = `${row * 20}px`;
+        bricksContainer.appendChild(brick);
+        bricks.push(brick);
+      }
+    }
+
+    let ballX = 200;
+    let ballY = 400;
+    let ballSpeedX = 2;
+    let ballSpeedY = -2;
+
+    const paddleWidth = 80;
+    const paddleHeight = 15;
+    let paddleX = (400 - paddleWidth) / 2;
+
+    document.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX - bricksContainer.getBoundingClientRect().left;
+      paddleX = Math.max(0, Math.min(400 - paddleWidth, mouseX - paddleWidth / 2));
+      paddle.style.left = `${paddleX}px`;
+    });
+
+    replayButton.addEventListener('click', () => {
+      location.reload(); // Restart the game
+    });
+
+    function showGameOverMessage() {
+      gameOverMessage.style.display = 'block';
+      ball.style.display = 'none';
+      paddle.style.display = 'none';
+    }
+
+    function showVictoryMessage() {
+      victoryMessage.style.display = 'block';
+      ball.style.display = 'none';
+      paddle.style.display = 'none';
+    }
+
+    function gameLoop() {
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+
+      if (ballX + ball.clientWidth > 400 || ballX < 0) {
+        ballSpeedX *= -1;
+      }
+      if (ballY < 0) {
+        ballSpeedY *= -1;
+      }
+      if (ballY + ball.clientHeight > 500) {
+        showGameOverMessage();
+      }
+
+      // Ball-paddle collision
+      if (
+        ballY + ball.clientHeight > 485 &&
+        ballX + ball.clientWidth > paddleX &&
+        ballX < paddleX + paddleWidth
+      ) {
+        ballSpeedY *= -1;
+      }
+
+      // Ball-brick collision
+      for (const brick of bricks) {
+        if (
+          ballY < brick.offsetTop + brick.clientHeight &&
+          ballY + ball.clientHeight > brick.offsetTop &&
+          ballX < brick.offsetLeft + brick.clientWidth &&
+          ballX + ball.clientWidth > brick.offsetLeft
+        ) {
+          ballSpeedY *= -1;
+          brick.remove();
+          if (bricks.length === 0) {
+            showVictoryMessage();
+          }
+        }
+      }
+
+      ball.style.left = `${ballX}px`;
+      ball.style.top = `${ballY}px`;
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+</body>
+</html>

@@ -1,12 +1,37 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games</title>
+    <style>
+        .game-link {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .game-link img {
+            max-width: 200px;
+            max-height: 200px;
+            border: 0;
+        }
+    </style>
 </head>
 <body>
-    <a href="games_list/breakout.html">play breakout</a>
-    <a href="https://coder1791.github.io/2048/">crack 2048</a>
-    <a href="https://coder1791.github.io/hextris">play hextris</a>
+    <a href="games_list/breakout.html" class="game-link">
+        <img src="imgs/atari-breakout.jpg" alt="Breakout">
+        <div>Play Breakout</div>
+    </a>
+    <a href="https://coder1791.github.io/2048/" class="game-link">
+        <img src="2048_image_url.jpg" alt="2048">
+        <div>Crack 2048</div>
+    </a>
+    <a href="https://coder1791.github.io/hextris" class="game-link">
+        <img src="hextris_image_url.jpg" alt="Hextris">
+        <div>Play Hextris</div>
+    </a>
 </body>
 </html>

@@ -5,19 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
         .game-link {
             display: inline-block;
             margin: 20px;
             text-align: center;
             text-decoration: none;
-            color: inherit;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        
+
+        .game-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
         .game-link img {
             max-width: 200px;
             max-height: 200px;
-            border: 0;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
+
+        .game-title {
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .game-link {
+                width: 100%;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -31,6 +76,10 @@
     </a>
     <a href="https://coder1791.github.io/hextris" class="game-link">
         <img src="imgs/hextris.png" alt="Hextris">
+        <div>Play Hextris</div>
+    </a>
+    <a href="https://coder1791.github.io/clumsy-bird/" class="game-link">
+        <img src="imgs/clumsy_bird.jpeg" alt="Hextris">
         <div>Play Hextris</div>
     </a>
 </body>

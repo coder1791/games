@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games</title>
+    <title>Awesome Games</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+        /* Reset default margin and padding */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        .title {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #ddd;
+        }
+
+        header {
+            background-image: linear-gradient(to right, #333, #4CAF50);
+            color: #fff;
             text-align: center;
             padding: 20px;
-            background-color: #333;
-            color: #fff;
+            border-bottom: 5px solid #4CAF50;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            font-size: 20px;
         }
 
         .game-container {
@@ -25,20 +42,23 @@
             align-items: center;
             flex-wrap: wrap;
             padding: 20px;
+            gap: 20px;
         }
 
         .game-link {
-            display: inline-block;
-            margin: 20px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-decoration: none;
-            color: #333;
-            background-color: #fff;
-            border: 1px solid #ddd;
+            color: #ddd;
+            background-color: #222;
+            border: 1px solid #444;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s, box-shadow 0.2s;
+            width: 250px;
+            overflow: hidden;
+            position: relative;
         }
 
         .game-link:hover {
@@ -47,14 +67,29 @@
         }
 
         .game-link img {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 100%;
             border-radius: 10px;
             margin-bottom: 10px;
         }
 
         .game-title {
             font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .game-link:hover .overlay {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
@@ -62,29 +97,49 @@
                 width: 100%;
             }
         }
-
     </style>
 </head>
 <body>
-    <a href="games_list/breakout.html" class="game-link">
-        <img src="imgs/atari-breakout.jpg" alt="Breakout">
-        <div>Play Breakout</div>
-    </a>
-    <a href="https://coder1791.github.io/2048/" class="game-link">
-        <img src="imgs/2048_logo.png" alt="2048">
-        <div>Crack 2048</div>
-    </a>
-    <a href="https://coder1791.github.io/hextris" class="game-link">
-        <img src="imgs/hextris.png" alt="Hextris">
-        <div>Play Hextris</div>
-    </a>
-    <a href="https://coder1791.github.io/clumsy-bird/" class="game-link">
-        <img src="imgs/clumsy_bird.jpeg" alt="Hextris">
-        <div>Play Hextris</div>
-    </a>
-    <a href="https://coder1791.github.io/AlienInvasion/" class="game-link">
-        <img src="imgs/alien_invasion.jpeg" alt="Hextris">
-        <div>Play Hextris</div>
-    </a>
+    <header>
+        <h1 class="header-title">🎮 Just Play It 🕹</h1>
+        <p class="header-subtitle">Explore a World of Fun Games</p>
+    </header>
+    <div class="game-container">
+        <a href="games_list/breakout.html" class="game-link" onclick="playGame('Breakout')">
+            <img src="imgs/atari-breakout.jpg" alt="Breakout">
+            <div class="overlay"></div>
+            <div class="game-title">Play Breakout</div>
+        </a>
+        <a href="https://coder1791.github.io/2048/" class="game-link" onclick="playGame('2048')">
+            <img src="imgs/2048_logo.png" alt="2048">
+            <div class="overlay"></div>
+            <div class="game-title">Crack 2048</div>
+        </a>
+        <a href="https://coder1791.github.io/hextris" class="game-link" onclick="playGame('Hextris')">
+            <img src="imgs/hextris.png" alt="Hextris">
+            <div class="overlay"></div>
+            <div class="game-title">Play Hextris</div>
+        </a>
+        <a href="https://coder1791.github.io/clumsy-bird/" class="game-link" onclick="playGame('Clumsy Bird')">
+            <img src="imgs/clumsy_bird.jpeg" alt="Clumsy Bird">
+            <div class="overlay"></div>
+            <div class="game-title">Play Clumsy Bird</div>
+        </a>
+        <a href="https://coder1791.github.io/AlienInvasion/" class="game-link" onclick="playGame('Alien Invasion')">
+            <img src="imgs/alien_invasion.jpeg" alt="Alien Invasion">
+            <div class="overlay"></div>
+            <div class="game-title">Play Alien Invasion</div>
+        </a>
+        <a href="https://lichess.org/" class="game-link" onclick="playGame('Alien Invasion')">
+            <img src="imgs/chess.jpeg" alt="Alien Invasion">
+            <div class="overlay"></div>
+            <div class="game-title">Play Chess</div>
+        </a>
+      </div>
+    <script>
+        function playGame(gameName) {
+            alert(`Starting ${gameName} game... Enjoy playing!`);
+        }
+    </script>
 </body>
 </html>

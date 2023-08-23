@@ -105,6 +105,8 @@
         <p class="header-subtitle">Explore a World of Fun Games</p>
     </header>
     <div class="game-container">
+        <a href="#" id="backButton" style="display: none;">Back to Games</a>
+        <iframe id="gameFrame" style="display: none;"></iframe>
         <a href="https://coder1791.github.io/Breakout_Game/" class="game-link" onclick="playGame('Breakout')">
             <img src="imgs/atari-breakout.jpg" alt="Breakout">
             <div class="overlay"></div>
@@ -156,5 +158,29 @@
             <div class="game-title">Play Orbium</div>
         </a>
       </div>
+      <script>
+        // JavaScript function to load games into the iframe
+        function loadGame(url, gameName) {
+            document.getElementById('gameFrame').src = url;
+            document.getElementById('gameFrame').style.display = 'block';
+            document.getElementById('backButton').style.display = 'block';
+
+            // Hide the game links
+            var gameLinks = document.querySelectorAll('.game-link');
+            for (var i = 0; i < gameLinks.length; i++) {
+                gameLinks[i].style.display = 'none';
+            }
+
+            // Set the back button's href to go back to the main page
+            document.getElementById('backButton').href = "#";
+            document.getElementById('backButton').addEventListener('click', function() {
+                document.getElementById('gameFrame').style.display = 'none';
+                document.getElementById('backButton').style.display = 'none';
+                for (var i = 0; i < gameLinks.length; i++) {
+                    gameLinks[i].style.display = 'block';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
